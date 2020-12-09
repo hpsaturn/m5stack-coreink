@@ -516,6 +516,9 @@ void ntpInit() {
         showTime(timeinfo);
         lastNTPtime = time(&now);
         lastEntryTime = millis();
+        M5.Speaker.tone(2700, 200);
+        delay(100);
+        M5.Speaker.mute();
     }
 }
 
@@ -560,9 +563,6 @@ void setup() {
     M5.update();
 
     if (M5.BtnMID.isPressed()) {
-        M5.Speaker.tone(2700,200);
-        delay(100);
-        M5.Speaker.mute();
         M5.M5Ink.clear();
         M5.M5Ink.drawBuff((uint8_t *)image_CoreInkWWellcome);
         delay(500);
@@ -574,14 +574,13 @@ void setup() {
 
     TimePageSprite.creatSprite(0, 0, 200, 200);
     //TimePageSprite.clear( CLEAR_DRAWBUFF | CLEAR_LASTBUFF );
+
     if (testMode) {
         testPage();
     }
-    delay(1000);
     // envsensors_init();
     // M5.Speaker.tone(2700,200);
     // M5.M5Ink.clear();
-    checkRTC();
     drawTimePage();
 }
 
